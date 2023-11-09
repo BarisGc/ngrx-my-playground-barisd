@@ -1,0 +1,45 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #start>
+    <mat-nav-list (click)="start.close()">
+      <a mat-list-item routerLink="e-books">
+        <div class="custom-flex">
+          <mat-icon>library_books</mat-icon>
+          <span class="custom-icon-text">E-Books</span>
+        </div></a
+      >
+
+      <a mat-list-item routerLink="books"
+        ><div class="custom-flex">
+          <mat-icon>library_books</mat-icon>
+          <span class="custom-icon-text">Books</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/login" *ngIf="isLoggedOut$ | async"
+        ><div class="custom-flex">
+          <mat-icon>account_circle</mat-icon>
+          <span class="custom-icon-text">Login</span>
+        </div>
+      </a>
+
+      <a mat-list-item (click)="logout()" *ngIf="isLoggedIn$ | async"
+        ><div class="custom-flex">
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="custom-icon-text">Logout</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button class="menu-button" mat-icon-button (click)="start.open('mouse')">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <router-outlet></router-outlet>
+</mat-sidenav-container>

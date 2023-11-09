@@ -1,0 +1,36 @@
+<!-- #navbar #tabs #tabbar #navigationTabs #queryParams #paramMap #params #hash #fragment -->
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a
+    mat-tab-link
+    *ngFor="let link of links; index as i"
+    (click)="activeLink = link.url"
+    [active]="activeLink == link.url"
+    [routerLink]="[
+      link.url.includes('view')
+        ? 'view/' + (selectedEBook$ | async)?.id
+        : link.url
+    ]"
+    [disabled]="link.disabled"
+  >
+    <!--
+  [queryParams]="{
+    exampleQueryParams1: i + 1,
+    exampleQueryParams2: i + 2
+  }"
+  [fragment]="'example-fragment=' + (i + 1)"
+  -->
+    {{
+      !link.url.includes("view")
+        ? (link.url | titlecase)
+        : (selectedEBook$ | async)?.volumeInfo?.title
+    }}
+    <!-- #titlecase #first use titlecase instead.
+  capitalizeFirstLetters(sentence: string) {
+    sentence
+      .split(' ')
+      .map((element) => element[0].toLocaleUpperCase() + element.slice(1).toLocaleLowerCase())
+      .join(' ');
+  } -->
+  </a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
