@@ -1,1 +1,1 @@
-<a>https://ngrx-my-playground-barisd.netlify.app/<a/>
+<a>https://latest-angular-ngrx-practice-barisd.netlify.app/</a>
