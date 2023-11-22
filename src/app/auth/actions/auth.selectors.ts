@@ -9,3 +9,5 @@
 // );
 
 // export const isLoggedOut = createSelector(isLoggedIn, (loggedIn) => !loggedIn);
+
+// TODO: check if this makes sense

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Link } from '@rootPath/shared/models/links';
-import { EBook } from '../../models/e-book.model';
-import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, of, takeUntil, tap } from 'rxjs';
+import { NavigationTab } from '../../models/e-book-navigation-tab';
+import * as fromNavigationTabs from '@example-app/features/e-books/reducers';
 
 @Component({
   selector: 'app-e-books',
@@ -10,10 +10,11 @@ import { Observable, Subject, takeUntil, tap } from 'rxjs';
   styleUrls: ['./e-books.component.scss'],
 })
 export class EBooksComponent implements OnInit, OnDestroy {
-  links: Link[] = [];
+  // navigationTabs$ = Observable<NavigationTab[]>;
+  navigationTabs$!: Observable<NavigationTab[]>;
+
   activeLink = '';
   constructor(private store: Store) {}
-
   ngOnInit(): void {
     this.setInitialState();
   }
@@ -23,24 +24,9 @@ export class EBooksComponent implements OnInit, OnDestroy {
   }
 
   setInitialNavigationTabs() {
-    this.links = [
-      {
-        url: 'stored',
-        disabled: false,
-      },
-      {
-        url: 'find',
-        disabled: false,
-      },
-      {
-        url: 'collection',
-        disabled: false,
-      },
-      {
-        url: 'view',
-        disabled: false,
-      },
-    ];
+    this.navigationTabs$ = this.store.select(
+      fromNavigationTabs.selectNavigationTabs
+    );
   }
 
   ngOnDestroy(): void {

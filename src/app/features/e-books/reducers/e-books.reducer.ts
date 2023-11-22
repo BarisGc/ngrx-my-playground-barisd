@@ -78,6 +78,10 @@ export const reducer = createReducer(
   on(ViewEBookPageActions.selectEBook, (state, { id }) => ({
     ...state,
     selectedEBookId: id,
+  })),
+  on(ViewEBookPageActions.unselectEBook, (state) => ({
+    ...state,
+    selectedEBookId: null,
   }))
 );
 

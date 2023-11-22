@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { NavigationTabsModule } from '@rootPath/shared/navigation-tabs/navigation-tabs.module';
-import { SharedModule } from '@rootPath/shared/shared.module';
+import { NavigationTabsModule } from '@example-app/shared/navigation-tabs/navigation-tabs.module';
+import { SharedModule } from '@example-app/shared/shared.module';
 
 import { EBookAuthorsComponent } from './components/e-book-authors/e-book-authors.component';
 import { EBookDetailComponent } from './components/e-book-detail/e-book-detail.component';

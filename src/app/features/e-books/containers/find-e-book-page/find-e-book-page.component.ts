@@ -5,7 +5,7 @@ import { Observable, filter, map, take, tap } from 'rxjs';
 import { EBook } from '../../models/e-book.model';
 import { FindEBookPageActions } from '../../actions/find-e-book-page.actions';
 
-import * as fromEBooks from '@rootPath/features/e-books/reducers';
+import * as fromEBooks from '@example-app/features/e-books/reducers';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

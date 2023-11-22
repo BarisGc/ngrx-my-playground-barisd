@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FindEBookPageActions } from '../../actions/find-e-book-page.actions';
 import { EBook } from '../../models/e-book.model';
-import * as fromEBooks from '@rootPath/features/e-books/reducers';
+import * as fromEBooks from '@example-app/features/e-books/reducers';
 
 @Component({
   selector: 'app-stored-e-books-page',

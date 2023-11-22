@@ -5,12 +5,13 @@ import {
   Action,
 } from '@ngrx/store';
 
-import * as fromFind from '@rootPath/features/e-books/reducers/find.reducer';
-import * as fromEBooks from '@rootPath/features/e-books/reducers/e-books.reducer';
-import * as fromCollection from '@rootPath/features/e-books/reducers/collection.reducer';
-import * as fromRoot from '@rootPath/reducers';
+import * as fromFind from '@example-app/features/e-books/reducers/find.reducer';
+import * as fromEBooks from '@example-app/features/e-books/reducers/e-books.reducer';
+import * as fromCollection from '@example-app/features/e-books/reducers/collection.reducer';
+import * as fromNavigationTabs from '@example-app/features/e-books/reducers/navigation-tabs.reducer';
+import * as fromRoot from '@example-app/reducers';
 
-import { EBook } from '@rootPath/features/e-books/models/e-book.model';
+import { EBook } from '@example-app/features/e-books/models/e-book.model';
 
 export const eBooksPageFeatureKey = 'eBooksPage';
 
@@ -18,6 +19,7 @@ export interface EBooksState {
   [fromFind.findFeatureKey]: fromFind.State;
   [fromEBooks.eBooksFeatureKey]: fromEBooks.State;
   [fromCollection.collectionFeatureKey]: fromCollection.State;
+  [fromNavigationTabs.navigationTabsFeatureKey]: fromNavigationTabs.State;
 }
 
 export interface State extends fromRoot.State {
@@ -30,6 +32,7 @@ export function reducers(state: EBooksState | undefined, action: Action) {
     [fromFind.findFeatureKey]: fromFind.reducer,
     [fromEBooks.eBooksFeatureKey]: fromEBooks.reducer,
     [fromCollection.collectionFeatureKey]: fromCollection.reducer,
+    [fromNavigationTabs.navigationTabsFeatureKey]: fromNavigationTabs.reducer,
   })(state, action);
 }
 
@@ -186,4 +189,15 @@ export const isSelectedEBookInCollection = createSelector(
   (ids, selected) => {
     return !!selected && ids.indexOf(selected) > -1;
   }
+);
+
+// "navigation tabs" reducer's selectors
+export const selectNavigationTabsState = createSelector(
+  selectEBooksPageState,
+  (state) => state.navigationTabs
+);
+
+export const selectNavigationTabs = createSelector(
+  selectNavigationTabsState,
+  fromNavigationTabs.getTabs
 );

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Book } from '@rootPath/features/books/models';
 import { Observable } from 'rxjs';
 import { EBook } from '../../models/e-book.model';
 import { SelectedEBookActions } from '../../actions/selected-e-book.actions';
 
-import * as fromEBooks from '@rootPath/features/e-books/reducers';
+import * as fromEBooks from '@example-app/features/e-books/reducers';
 @Component({
   selector: 'app-selected-e-book',
   templateUrl: './selected-e-book.component.html',

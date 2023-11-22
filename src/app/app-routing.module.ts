@@ -1,31 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './core/containers/not-found-page/not-found-page.component';
-
+import { authGuard } from '@example-app/auth/services';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'e-books',
+    redirectTo: '/e-books',
     pathMatch: 'full',
   },
   {
     path: 'e-books',
     loadChildren: () =>
       import('./features/e-books/e-books.module').then((m) => m.EBooksModule),
-    // canActivate: [AuthGuard]
+    canActivate: [authGuard],
   },
-  {
-    path: 'books',
-    loadChildren: () =>
-      import('./features/books/books.module').then((m) => m.BooksModule),
-    // canActivate: [AuthGuard]
-  },
-
-  //   {
-  //     path: 'courses',
-  //     loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
-  //     canActivate: [AuthGuard]
-  // },
   {
     path: '**',
     component: NotFoundPageComponent,
@@ -34,7 +22,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

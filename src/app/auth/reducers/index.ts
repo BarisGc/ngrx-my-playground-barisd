@@ -1,35 +1,52 @@
-// import {
-//   ActionReducer,
-//   ActionReducerMap,
-//   createFeatureSelector,
-//   createReducer,
-//   createSelector,
-//   MetaReducer,
-//   on,
-// } from '@ngrx/store';
-// import { User } from '../models/user.model';
-// import { AuthActions } from './action-types';
+import {
+  createSelector,
+  createFeatureSelector,
+  Action,
+  combineReducers,
+} from '@ngrx/store';
+import * as fromRoot from '@example-app/reducers';
+import * as fromAuth from '@example-app/auth/reducers/auth.reducer';
+import * as fromLoginPage from '@example-app/auth/reducers/login-page.reducer';
 
-// export interface AuthState {
-//   user: User;
-// }
+export const authFeatureKey = 'auth';
 
-// export const initialAuthState: AuthState = {
-//   user: undefined,
-// };
+export interface AuthState {
+  [fromAuth.statusFeatureKey]: fromAuth.State;
+  [fromLoginPage.loginPageFeatureKey]: fromLoginPage.State;
+}
 
-// export const authReducer = createReducer(
-//   initialAuthState,
+export interface State extends fromRoot.State {
+  [authFeatureKey]: AuthState;
+}
 
-//   on(AuthActions.login, (state, action) => {
-//     return {
-//       user: action.user,
-//     };
-//   }),
+export function reducers(state: AuthState | undefined, action: Action) {
+  return combineReducers({
+    [fromAuth.statusFeatureKey]: fromAuth.reducer,
+    [fromLoginPage.loginPageFeatureKey]: fromLoginPage.reducer,
+  })(state, action);
+}
 
-//   on(AuthActions.logout, (state, action) => {
-//     return {
-//       user: undefined,
-//     };
-//   })
-// );
+export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
+
+export const selectAuthStatusState = createSelector(
+  selectAuthState,
+  (state) => state.status
+);
+export const selectUser = createSelector(
+  selectAuthStatusState,
+  fromAuth.getUser
+);
+export const selectLoggedIn = createSelector(selectUser, (user) => !!user);
+
+export const selectLoginPageState = createSelector(
+  selectAuthState,
+  (state) => state.loginPage
+);
+export const selectLoginPageError = createSelector(
+  selectLoginPageState,
+  fromLoginPage.getError
+);
+export const selectLoginPagePending = createSelector(
+  selectLoginPageState,
+  fromLoginPage.getPending
+);

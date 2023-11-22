@@ -8,13 +8,6 @@
         </div></a
       >
 
-      <a mat-list-item routerLink="books"
-        ><div class="custom-flex">
-          <mat-icon>library_books</mat-icon>
-          <span class="custom-icon-text">Books</span>
-        </div>
-      </a>
-
       <a mat-list-item routerLink="/login" *ngIf="isLoggedOut$ | async"
         ><div class="custom-flex">
           <mat-icon>account_circle</mat-icon>

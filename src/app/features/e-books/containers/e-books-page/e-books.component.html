@@ -1,2 +1,4 @@
-<app-navigation-tabs [links]="links" ></app-navigation-tabs>
+<app-navigation-tabs
+  [navigationTabs]="(navigationTabs$ | async)!"
+></app-navigation-tabs>
 <router-outlet></router-outlet>

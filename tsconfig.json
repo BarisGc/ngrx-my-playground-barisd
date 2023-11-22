@@ -21,7 +21,7 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@rootPath/*": ["src/app/*"]
+      "@example-app/*": ["src/app/*"]
     }
   },
   "angularCompilerOptions": {

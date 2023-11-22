@@ -1,13 +1,25 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { User } from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
 
-// @Injectable()
-// export class AuthService {
-//   constructor(private http: HttpClient) {}
+import { Credentials, User } from '@example-app/auth/models';
 
-//   login(email: string, password: string): Observable<User> {
-//     return this.http.post<User>('/api/login', { email, password });
-//   }
-// }
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  login({ username, password }: Credentials): Observable<User> {
+    /**
+     * Simulate a failed login to display the error
+     * message for the login form.
+     */
+    if (username !== 'test' && username !== 'ngrx') {
+      return throwError(() => 'Invalid username or password');
+    }
+
+    return of({ name: 'User' });
+  }
+
+  logout() {
+    return of(true);
+  }
+}

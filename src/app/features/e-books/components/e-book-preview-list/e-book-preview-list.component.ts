@@ -1,4 +1,4 @@
-import { EBook } from '@rootPath/features/e-books/models/e-book.model';
+import { EBook } from '@example-app/features/e-books/models/e-book.model';
 import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
