@@ -8,7 +8,6 @@ import { EBookPreviewListComponent } from './components/e-book-preview-list/e-bo
 import { EBookPreviewComponent } from './components/e-book-preview/e-book-preview.component';
 import { EBookSearchComponent } from './components/e-book-search/e-book-search.component';
 import { EBookCollectionPageComponent } from './containers/e-book-collection-page/e-book-collection-page.component';
-import { EBooksComponent } from './containers/e-books-page/e-books.component';
 import { EBooksRoutingModule } from './e-books-routing.module';
 import { SelectedEBookComponent } from './containers/selected-e-book/selected-e-book.component';
 import { FindEBookPageComponent } from './containers/find-e-book-page/find-e-book-page.component';
@@ -21,6 +20,9 @@ import { CollectionEffects } from './effects/collection.effects';
 
 import * as fromEBooksPage from './reducers';
 import { StoredEBooksPageComponent } from './containers/stored-e-books-page/stored-e-books-page.component';
+import { EBookCollectionTableComponent } from './components/e-book-collection-table/e-book-collection-table.component';
+import { EBookCollectionItemComponent } from './components/e-book-collection-item/e-book-collection-item.component';
+import { EBooksPageComponent } from './containers/e-books-page/e-books-page.component';
 
 export const COMPONENTS = [
   SelectedEBookComponent,
@@ -29,10 +31,12 @@ export const COMPONENTS = [
   EBookPreviewListComponent,
   EBookPreviewComponent,
   EBookSearchComponent,
+  EBookCollectionTableComponent,
+  EBookCollectionItemComponent,
 ];
 
 export const CONTAINERS = [
-  EBooksComponent,
+  EBooksPageComponent,
   EBookCollectionPageComponent,
   FindEBookPageComponent,
   ViewEBookPageComponent,

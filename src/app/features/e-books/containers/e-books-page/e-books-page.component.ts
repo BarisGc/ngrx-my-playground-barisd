@@ -5,11 +5,11 @@ import { NavigationTab } from '../../models/e-book-navigation-tab';
 import * as fromNavigationTabs from '@example-app/features/e-books/reducers';
 
 @Component({
-  selector: 'app-e-books',
-  templateUrl: './e-books.component.html',
-  styleUrls: ['./e-books.component.scss'],
+  selector: 'app-e-books-page',
+  templateUrl: './e-books-page.component.html',
+  styleUrls: ['./e-books-page.component.scss'],
 })
-export class EBooksComponent implements OnInit, OnDestroy {
+export class EBooksPageComponent implements OnInit, OnDestroy {
   // navigationTabs$ = Observable<NavigationTab[]>;
   navigationTabs$!: Observable<NavigationTab[]>;
 
