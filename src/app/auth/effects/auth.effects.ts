@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
-import {
-  LoginPageActions,
-  AuthActions,
-  AuthApiActions,
-} from '@example-app/auth/actions';
+
 import { Credentials } from '@example-app/auth/models';
 import { AuthService } from '@example-app/auth/services';
 import { LogoutConfirmationDialogComponent } from '@example-app/auth/components';
+import { AuthActions } from '../actions/auth.actions';
+import { LoginPageActions } from '../actions/login-page.actions';
+import { AuthApiActions } from '../actions/auth-api.actions';
+import { UserActions } from '@example-app/core/actions';
 // import { UserActions } from '@example-app/core/actions';
 
 @Injectable()
@@ -33,7 +33,10 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthApiActions.loginSuccess),
-        tap(() => this.router.navigate(['/']))
+        tap((action) => {
+          localStorage.setItem('user', JSON.stringify(action.user));
+          this.router.navigate(['/']);
+        })
       ),
     { dispatch: false }
   );
@@ -61,18 +64,22 @@ export class AuthEffects {
 
         return dialogRef.afterClosed();
       }),
-      map((result) =>
-        result ? AuthActions.logout() : AuthActions.logoutConfirmationDismiss()
-      )
+      map((result) => {
+        if (result) {
+          localStorage.removeItem('user');
+          return AuthActions.logout();
+        }
+        return AuthActions.logoutConfirmationDismiss();
+      })
     )
   );
 
-  // logoutIdleUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserActions.idleTimeout),
-  //     map(() => AuthActions.logout())
-  //   )
-  // );
+  logoutIdleUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.idleTimeout),
+      map(() => AuthActions.logout())
+    )
+  );
 
   constructor(
     private actions$: Actions,

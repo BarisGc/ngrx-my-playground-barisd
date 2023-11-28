@@ -8,6 +8,10 @@ import {
 } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import * as fromAuth from '@example-app/auth/reducers';
+import * as fromRoot from '@example-app/reducers';
+import { LayoutActions } from '@example-app/core/actions';
+import { AuthActions } from '@example-app/auth/actions/auth.actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,18 +20,41 @@ import { Observable, of } from 'rxjs';
 export class AppComponent {
   loading = true;
 
-  isLoggedIn$: Observable<boolean> = of(false);
-  isLoggedOut$: Observable<boolean> = of(true);
+  showSidenav$: Observable<boolean> = of(false);
+  loggedIn$: Observable<boolean> = of(false);
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) {
+    /**
+     * Selectors can be applied with the `select` operator which passes the state
+     * tree to the provided selector
+     */
+    this.showSidenav$ = this.store.select(fromRoot.selectShowSidenav);
+    this.loggedIn$ = this.store.select(fromAuth.selectLoggedIn);
+  }
 
   ngOnInit() {
-    const userProfile = localStorage.getItem('user');
+    this.handleNavigationLoading();
+  }
 
-    if (userProfile) {
-      // this.store.dispatch(login({ user: JSON.parse(userProfile) }));
-    }
+  closeSidenav() {
+    /**
+     * All state updates are handled through dispatched actions in 'container'
+     * components. This provides a clear, reproducible history of state
+     * updates and user interaction through the life of our
+     * application.
+     */
+    this.store.dispatch(LayoutActions.closeSidenav());
+  }
 
+  openSidenav() {
+    this.store.dispatch(LayoutActions.openSidenav());
+  }
+
+  logout() {
+    this.store.dispatch(AuthActions.logoutConfirmation());
+  }
+
+  handleNavigationLoading() {
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {
@@ -46,13 +73,5 @@ export class AppComponent {
         }
       }
     });
-
-    // this.isLoggedIn$ = this.store.pipe(select(isLoggedIn));
-
-    // this.isLoggedOut$ = this.store.pipe(select(isLoggedOut));
-  }
-
-  logout() {
-    // this.store.dispatch(logout());
   }
 }

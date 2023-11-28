@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Credentials } from '@example-app/auth/models';
 import * as fromAuth from '@example-app/auth/reducers';
-import { LoginPageActions } from '@example-app/auth/actions';
+import { LoginPageActions } from '../actions/login-page.actions';
 
 @Component({
-  selector: 'bc-login-page',
+  selector: 'app-login-page',
   template: `
-    <bc-login-form
+    <app-login-form
       (submitted)="onSubmit($event)"
       [pending]="(pending$ | async)!"
       [errorMessage]="error$ | async"
     >
-    </bc-login-form>
+    </app-login-form>
   `,
   styles: [],
 })

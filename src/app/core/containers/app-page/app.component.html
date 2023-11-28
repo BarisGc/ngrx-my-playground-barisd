@@ -1,4 +1,32 @@
-<mat-sidenav-container fullscreen>
+<app-layout>
+  <app-sidenav [open]="(showSidenav$ | async)!" (closeMenu)="closeSidenav()">
+    <app-nav-item
+      (navigate)="closeSidenav()"
+      *ngIf="loggedIn$ | async"
+      routerLink="e-books"
+      icon="library_books"
+    >
+      E-Books
+    </app-nav-item>
+    <app-nav-item (navigate)="closeSidenav()" icon="account_circle">
+      Sign In
+    </app-nav-item>
+    <app-nav-item
+      (navigate)="logout()"
+      *ngIf="loggedIn$ | async"
+      icon="exit_to_app"
+    >
+      Sign Out
+    </app-nav-item>
+  </app-sidenav>
+  <app-toolbar (openMenu)="openSidenav()">E-Book Module</app-toolbar>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <router-outlet></router-outlet>
+</app-layout>
+
+<!-- <mat-sidenav-container fullscreen>
   <mat-sidenav #start>
     <mat-nav-list (click)="start.close()">
       <a mat-list-item routerLink="e-books">
@@ -35,4 +63,4 @@
   </div>
 
   <router-outlet></router-outlet>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

@@ -15,9 +15,10 @@ import { CommonModule } from '@angular/common';
 import { metaReducers, rootReducers } from './reducers';
 import { MaterialModule } from './material';
 import { NotFoundPageComponent } from './core/containers';
+import { CoreModule } from './core';
+import { UserEffects, RouterEffects } from './core/effects';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -80,7 +81,8 @@ import { NotFoundPageComponent } from './core/containers';
       logOnly: !isDevMode(),
     }),
 
-    EffectsModule.forRoot(),
+    EffectsModule.forRoot(UserEffects, RouterEffects),
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

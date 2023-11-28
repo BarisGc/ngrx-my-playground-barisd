@@ -9,3 +9,4 @@ import { EBook } from '../../models/e-book.model';
 export class EBookCollectionItemComponent {
   @Input() item!: EBook;
 }
+// <!-- Not necessary -->

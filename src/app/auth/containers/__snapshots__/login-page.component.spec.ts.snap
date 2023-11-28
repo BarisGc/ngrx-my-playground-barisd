@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login Page should compile 1`] = `
-<bc-login-page
+<app-login-page
   error$={[Function Store]}
   pending$={[Function Store]}
   store={[Function MockStore]}
 >
-  <bc-login-form>
+  <app-login-form>
     <mat-card
       class="mat-mdc-card mdc-card"
     >
@@ -143,6 +143,6 @@ exports[`Login Page should compile 1`] = `
         </form>
       </mat-card-content>
     </mat-card>
-  </bc-login-form>
-</bc-login-page>
+  </app-login-form>
+</app-login-page>
 `;
