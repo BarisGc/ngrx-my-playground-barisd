@@ -9,7 +9,7 @@
         (keyup)="bySearch($event)"
       />
     </mat-form-field>
-    <mat-spinner
+    <mat-spinner *ngIf="searching"
       [class.show]="searching"
       [diameter]="30"
       [strokeWidth]="3"
