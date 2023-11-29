@@ -22,7 +22,7 @@ export class AuthEffects {
       map((action) => action.credentials),
       exhaustMap((auth: Credentials) =>
         this.authService.login(auth).pipe(
-          map((user) => AuthApiActions.loginSuccess({ user })),
+          map((credentials) => AuthApiActions.loginSuccess({ credentials })),
           catchError((error) => of(AuthApiActions.loginFailure({ error })))
         )
       )
@@ -34,7 +34,10 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthApiActions.loginSuccess),
         tap((action) => {
-          localStorage.setItem('user', JSON.stringify(action.user));
+          localStorage.setItem(
+            'credentials',
+            JSON.stringify(action.credentials)
+          );
           this.router.navigate(['/']);
         })
       ),
@@ -66,7 +69,7 @@ export class AuthEffects {
       }),
       map((result) => {
         if (result) {
-          localStorage.removeItem('user');
+          localStorage.removeItem('credentials');
           return AuthActions.logout();
         }
         return AuthActions.logoutConfirmationDismiss();

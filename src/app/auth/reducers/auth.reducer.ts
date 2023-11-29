@@ -1,22 +1,25 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from '@example-app/auth/models';
+import { Credentials, User } from '@example-app/auth/models';
 import { AuthApiActions } from '../actions/auth-api.actions';
 import { AuthActions } from '../actions/auth.actions';
 
 export const statusFeatureKey = 'status';
 
 export interface State {
-  user: User | null;
+  credentials: Credentials | null;
 }
 
 export const initialState: State = {
-  user: null,
+  credentials: null,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(AuthApiActions.loginSuccess, (state, { user }) => ({ ...state, user })),
+  on(AuthApiActions.loginSuccess, (state, { credentials }) => ({
+    ...state,
+    credentials,
+  })),
   on(AuthActions.logout, () => initialState)
 );
 
-export const getUser = (state: State) => state.user;
+export const getUser = (state: State) => state.credentials;

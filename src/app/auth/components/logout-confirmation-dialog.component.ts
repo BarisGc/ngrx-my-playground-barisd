@@ -32,4 +32,7 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class LogoutConfirmationDialogComponent {}
+export class LogoutConfirmationDialogComponent {
+  constructor() {}
+  logout() {}
+}

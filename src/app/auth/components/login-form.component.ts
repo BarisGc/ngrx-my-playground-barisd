@@ -95,7 +95,7 @@ export class LoginFormComponent {
 
   form: FormGroup = new FormGroup({
     username: new FormControl('ngrx'),
-    password: new FormControl(''),
+    password: new FormControl('Password10'),
   });
 
   submit() {

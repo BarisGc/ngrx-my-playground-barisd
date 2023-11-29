@@ -5,20 +5,15 @@ import { MaterialModule } from '@example-app/material';
 import {
   LayoutComponent,
   NavItemComponent,
-  SidenavComponent,
   ToolbarComponent,
 } from './components';
 import { AppComponent, NotFoundPageComponent } from './containers';
-
-
-
 
 export const COMPONENTS = [
   AppComponent,
   NotFoundPageComponent,
   LayoutComponent,
   NavItemComponent,
-  SidenavComponent,
   ToolbarComponent,
 ];
 

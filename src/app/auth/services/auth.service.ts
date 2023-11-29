@@ -7,19 +7,15 @@ import { Credentials, User } from '@example-app/auth/models';
   providedIn: 'root',
 })
 export class AuthService {
-  login({ username, password }: Credentials): Observable<User> {
+  login({ username, password }: Credentials): Observable<Credentials> {
     /**
      * Simulate a failed login to display the error
      * message for the login form.
      */
-    if (username !== 'test' && username !== 'ngrx') {
+    if (username !== 'ngrx' || password !== 'Password10') {
       return throwError(() => 'Invalid username or password');
     }
 
-    return of({ name: 'User' });
-  }
-
-  logout() {
-    return of(true);
+    return of({ username, password });
   }
 }
