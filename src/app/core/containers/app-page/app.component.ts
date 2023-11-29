@@ -56,8 +56,9 @@ export class AppComponent {
   }
 
   checkUserAccess() {
+    // TODO: Better to use "effects" & "loadUser" like "loadCollection" approach instead of the code below
     const credentials = JSON.parse(localStorage.getItem('credentials')!);
     if (credentials)
-      this.store.dispatch(AuthApiActions.loginSuccess({ credentials }));
+      this.store.dispatch(LoginPageActions.login({ credentials }));
   }
 }

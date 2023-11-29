@@ -22,12 +22,16 @@ import { LayoutActions } from '../actions';
           >
             E-Books
           </app-nav-item>
-          <app-nav-item (navigate)="closeSidenav()" icon="account_circle">
+          <app-nav-item
+            *ngIf="!loggedIn"
+            (navigate)="closeSidenav()"
+            icon="account_circle"
+          >
             Sign In
           </app-nav-item>
           <app-nav-item
-            (navigate)="logout()"
             *ngIf="loggedIn"
+            (navigate)="logout()"
             icon="exit_to_app"
           >
             Sign Out
