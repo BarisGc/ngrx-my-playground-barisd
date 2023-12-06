@@ -14,7 +14,6 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CommonModule } from '@angular/common';
 import { metaReducers, rootReducers } from './reducers';
 import { MaterialModule } from './material';
-import { NotFoundPageComponent } from './core/containers';
 import { CoreModule } from './core';
 import { UserEffects, RouterEffects } from './core/effects';
 

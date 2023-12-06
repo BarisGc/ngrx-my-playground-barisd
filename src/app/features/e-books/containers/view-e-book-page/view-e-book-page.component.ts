@@ -60,14 +60,7 @@ export class ViewEBookPageComponent {
       .select(fromEBooks.isSelectedEBookInCollection)
       .subscribe((isSelectedEBookInCollection) => {
         if (!isSelectedEBookInCollection) {
-          this.store.dispatch(
-            EBookNavigationTabActions.removeTab({
-              tab: {
-                ...tab,
-                isDisabled: false,
-              },
-            })
-          );
+          this.store.dispatch(EBookNavigationTabActions.removeTab({ tab }));
         }
         if (isSelectedEBookInCollection) {
           this.store.dispatch(

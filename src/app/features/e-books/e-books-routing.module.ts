@@ -19,18 +19,22 @@ const routes: Routes = [
       {
         path: 'stored',
         component: StoredEBooksPageComponent,
+        data: { title: 'Stored E-Books' },
       },
       {
         path: 'find',
         component: FindEBookPageComponent,
+        data: { title: 'Find E-Book' },
       },
       {
         path: 'collection',
         component: EBookCollectionPageComponent,
+        data: { title: 'Collected E-Books' },
       },
       {
         path: 'view/:id',
         component: ViewEBookPageComponent,
+        data: { title: 'E-Book Details' },
       },
     ],
   },
